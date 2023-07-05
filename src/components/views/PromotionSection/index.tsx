@@ -1,8 +1,8 @@
 import Image from "next/image";
 import React from "react";
-import img1 from "@/components/assets/images/event1.webp";
-import img2 from "@/components/assets/images/event2.webp";
-import img3 from "@/components/assets/images/event3.webp";
+import img1 from "@/components/assets/Images/event1.webp";
+import img2 from "@/components/assets/Images/event2.webp";
+import img3 from "@/components/assets/Images/event3.webp";
 
 const PromotionSection = () => {
   return (
