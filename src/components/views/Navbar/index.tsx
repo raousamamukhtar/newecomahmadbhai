@@ -19,7 +19,7 @@ export const Navbar = () => {
   const [cartItemNumber, setcartItemNumber] = useState<number>(0)
   return (
     <div>
-      <div className="py-2 flex justify-between items-center gap-8 ">
+      <div className="py-6 mx-10 lg:mx-0 flex justify-between items-center gap-8 ">
         <div>
           <Image src={Logo} alt="Logo" />
         </div>
