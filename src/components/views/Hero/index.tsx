@@ -1,5 +1,5 @@
 import React from "react";
-import { CgShoppingCart } from "react-icons/Cg";
+import { CgShoppingCart } from "react-icons/cg";
 import Image from "next/image";
 import bazarLogo from "@/components/assets/Images/bazaar.webp"
 import buslteLogo from "@/components/assets/Images/bustle.webp";
