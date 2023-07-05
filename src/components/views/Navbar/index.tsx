@@ -2,10 +2,10 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { RiMenu3Line } from "react-icons/Ri";
-import { IoMdClose } from "react-icons/Io";
-import { CgShoppingCart } from "react-icons/Cg";
-import { CiSearch } from "react-icons/Ci";
+import { RiMenu3Line } from "react-icons/ri";
+import { IoMdClose } from "react-icons/io";
+import { CgShoppingCart } from "react-icons/cg";
+import { CiSearch } from "react-icons/ci";
 
 import Logo from "/public/logo.png";
 import MobileNavbar from "@/components/views/Navbar/subComponents/MobileNavbar";
