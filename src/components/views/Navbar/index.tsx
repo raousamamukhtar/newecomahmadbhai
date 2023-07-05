@@ -26,7 +26,7 @@ export const Navbar = () => {
         <div className="hidden lg:flex justify-between items-center w-full ">
           <ul className="flex space-x-10 font-medium">
             {NavbarArray.map((item: NavbarItemType, index: number) => (
-              <li>
+              <li key={index}>
                 <Link href={item.href}>{item.label}</Link>
               </li>
             ))}
