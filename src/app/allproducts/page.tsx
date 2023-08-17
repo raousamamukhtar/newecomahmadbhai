@@ -32,8 +32,10 @@ export default async function page() {
       <Carousel responsive={responsive}>
         {data.map((product: any) => (
           <Link key={product._id} href={`product/${product.slug.current}`}>
-            <img
-              className="w-[400px] h-[400px] hover:scale-110 transform"
+            <Image
+            width={400}
+            height={400}
+              // className="w-[400px] h-[400px] hover:scale-110 transform"
               src={urlForImage(product.image[0]).url()}
               alt="pic"
             />
