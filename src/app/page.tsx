@@ -7,19 +7,19 @@ import PromotionSection from "@/components/views/PromotionSection";
 import SliderSection from "@/components/views/SliderSection";
 import { client } from "sanity/lib/client";
 
-async function fetAllProductData(){
-  let res = await fetch(`https://${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v2021-06-07/data/query/production?query=*[_type == "products"]`);
+// async function fetAllProductData(){
+//   let res = await fetch(`https://${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v2021-06-07/data/query/production?query=*[_type == "products"]`);
 
-  if (!res.ok){
-    throw new Error("Failed to fetch")
-  }
+//   if (!res.ok){
+//     throw new Error("Failed to fetch")
+//   }
 
-  return res.json();
+//   return res.json();
   
-}
+// }
 
 export default async function Home() {
-  let {result} :responseType = await fetAllProductData();
+  // let {result} :responseType = await fetAllProductData();
   return (
    <div>
     <Hero />

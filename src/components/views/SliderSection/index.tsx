@@ -5,6 +5,7 @@ import { urlForImage } from '../../../../sanity/lib/image';
 import Link from 'next/link';
 import Carousel from 'react-multi-carousel';
 import "react-multi-carousel/lib/styles.css";
+import Image from 'next/image';
 
 export default async function page() {
     const data = await FetchData();
@@ -27,13 +28,19 @@ export default async function page() {
   return (
     <div>
       <Carousel responsive={responsive}>
-      {data.map((product:any) => 
-      <Link href={`product/${product.slug.current}`}>
-        <img className='w-[400px] h-[400px] hover:scale-110 transform' src={urlForImage(product.image[0]).url()} alt="pic" />
-        <h1 className='font-semibold text-lg tracking-wider pt-2'>{product.productName}</h1>
-        <p className='font-semibold text-lg'>{product.price}</p>
-      </Link >
-      )}
+      {data.map((product: any) => (
+          <Link key={product._id} href={`product/${product.slug.current}`}>
+            <img
+              className="w-[400px] h-[400px] hover:scale-110 transform"
+              src={urlForImage(product.image[0]).url()}
+              alt="pic"
+            />
+            <h1 className="font-semibold text-lg tracking-wider pt-2">
+              {product.productName}
+            </h1>
+            <p className="font-semibold text-lg">{product.price}</p>
+          </Link>
+        ))}
       </Carousel>
     </div>
   )
