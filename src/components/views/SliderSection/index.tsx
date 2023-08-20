@@ -39,7 +39,6 @@ export default async function page() {
             <Image
               width={400}
               height={400}
-              // className="w-[400px] h-[400px] hover:scale-110 transform"
               src={urlForImage(product.image[0]).url()}
               alt="pic"
             />
