@@ -21,7 +21,9 @@ export const Navbar = () => {
     <div>
       <div className="py-6 mx-10 lg:mx-0 flex justify-between items-center gap-8 ">
         <div>
+          <Link href={"/"}>
           <Image src={Logo} alt="Logo" />
+          </Link>
         </div>
         <div className="hidden lg:flex justify-between items-center w-full ">
           <ul className="flex space-x-10 font-medium">

@@ -39,11 +39,11 @@ export default async function page() {
             <Image
               width={400}
               height={400}
-              src={urlForImage(product.image[0]).url()}
+              src={urlForImage(product.image).url()}
               alt="pic"
             />
             <h1 className="font-semibold text-lg tracking-wider pt-2">
-              {product.productName}
+              {product.title}
             </h1>
             <p className="font-semibold text-lg">{product.price}</p>
           </Link>

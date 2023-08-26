@@ -6,53 +6,28 @@ export default defineType({
   title: "Products",
   fields: [
     defineField({
-      name: "productName",
+      name: "title",
       type: "string",
-      title: "ProductName",
+      title: "Title",
     }),
     defineField({
-      title: "Slug",
       name: "slug",
       type: "slug",
+      title: "Slug",
       options: {
-        source: "productName",
-        maxLength: 200, // will be ignored if slugify is set
-        slugify: (input: any) =>
-          input.toLowerCase().replace(/\s+/g, "-").slice(0, 200),
+        source: "title",
+        maxLength: 50,
       },
     }),
     defineField({
       name: "description",
-      type: "array",
+      type: "string",
       title: "Description",
-      of: [
-        {
-          type: "block",
-        },
-      ],
     }),
     defineField({
       name: "image",
-      type: "array",
+      type: "image",
       title: "Image",
-      of: [
-        {
-          type: "image",
-          fields: [
-            {
-              name: "alt",
-              type: "text",
-              title: "Alternative text",
-            },
-          ],
-        },
-      ],
-    }),
-    defineField({
-      name: "productTypes",
-      type: "array",
-      title: "ProductType",
-      of: [{ type: "string" }],
     }),
     defineField({
       name: "price",
@@ -60,10 +35,16 @@ export default defineType({
       title: "Price",
     }),
     defineField({
-      name: "size",
-      type: "array",
-      title: "Sizes",
-      of: [{ type: "string" }],
+      name: "category",
+      type: "string",
+      title: "Category",
+      options: {
+        list: [
+          { title: "Mens", value: "mens" },
+          { title: "Womens", value: "womens" },
+          { title: "Kids", value: "kids" },
+        ],
+      },
     }),
     defineField({
       name: "quantity",
