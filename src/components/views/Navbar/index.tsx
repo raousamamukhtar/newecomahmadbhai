@@ -13,10 +13,12 @@ import {
   NavbarArray,
   NavbarItemType,
 } from "@/components/utils/NavbarArrayAndTypes";
+import { SignInButton, UserButton, useAuth } from "@clerk/nextjs";
 
 export const Navbar = () => {
   const [IsNavbarOpen, setNavbarOpen] = useState<boolean>(false);
   const [cartItemNumber, setcartItemNumber] = useState<number>(0)
+  const { isSignedIn } = useAuth();
   return (
     <div>
       <div className="py-6 mx-10 lg:mx-0 flex justify-between items-center gap-8 ">
@@ -45,8 +47,16 @@ export const Navbar = () => {
             <div className="absolute top-1 right-2 px-1 text-xs bg-red-500 rounded-full">
               {cartItemNumber}
             </div>
+            <Link href={"/cart"}>
             <CgShoppingCart className="m-3" size={20} />
+            </Link>
           </div>
+          <div >
+      {!isSignedIn && (
+        <SignInButton mode="modal" />
+      )}
+      <UserButton afterSignOutUrl="/" />
+    </div>
         </div>
         <div onClick={() => setNavbarOpen(!IsNavbarOpen)}>
           {IsNavbarOpen ? (

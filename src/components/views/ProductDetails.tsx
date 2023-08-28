@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { urlForImage } from "../../../sanity/lib/image";
+import { useAuth } from "@clerk/nextjs";
 
 // import { useAuth } from "@clerk/nextjs";
 
@@ -9,7 +10,7 @@ export default function ProductDetails({
 }: {
   filteredData: any;
 }) {
-  // const { userId } = useAuth();
+  const { userId } = useAuth();
   // console.log(userId);
   const [quantity, setQuantity] = useState(1);
 
@@ -27,7 +28,7 @@ export default function ProductDetails({
       const res = await fetch("/api/cart", {
         method: "POST",
         body: JSON.stringify({
-          // user_id: userId,
+          user_id: userId,
           product_id: filteredData._id,
           product_title: filteredData.title,
           product_price: filteredData.price * quantity,
