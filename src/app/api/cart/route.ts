@@ -1,70 +1,63 @@
-import { cartColumns, db } from "Database/Drizzle";
+import { addToCart, cartTable, db } from "@/lib/drizzle";
 import { NextRequest, NextResponse } from "next/server";
-import {and, eq } from "drizzle-orm";
-
+import { auth } from "@clerk/nextjs";
+import { and, eq } from "drizzle-orm";
 
 
 export const POST = async (request: NextRequest) => {
-  const req = await request.json();
+  const { userId } = auth();
+
+  const req: addToCart = await request.json();
 
   try {
-    const res = await db
-      .insert(cartColumns)
-      .values({
-        user_id: req.user_id,
-        product_id: req.product_id,
-        product_title: req.product_title,
-        image_url: req.image_url,
-        product_price: req.product_price,
-        product_quantity: req.product_quantity,
-      })
-      .onConflictDoUpdate({
-        target: [cartColumns.user_id, cartColumns.product_title],
-        set: {
-          product_quantity: req.product_quantity,
-          product_price: req.product_price,
-        },
-      })
-      .returning();
-    console.log("Data Posted To Database");
-    return NextResponse.json({ res });
-  } catch (error) {
-    console.log("Error While Posting Data To Database");
-    console.log("error", error);
-    return NextResponse.json({ message: "Something Went Wrong" });
-  }
-};
-
-export const GET = async (request: NextRequest) => {
-  const uid = request.nextUrl.searchParams.get("user_id") as string;
-  try {
-    const res = await db
-      .select()
-      .from(cartColumns)
-      .where(eq(cartColumns.user_id, uid));
-    return NextResponse.json(res);
+    if (req) {
+      const res = await db
+        .insert(cartTable)
+        .values({
+          user_id: userId as string,
+          product_id: req.product_id,
+          quantity: req.quantity,
+          image: req.image,
+          price: req.price,
+          product_name: req.product_name,
+          subcat: req.subcat,
+          total_price: req.price * req.quantity,
+        })
+        .returning();
+      return NextResponse.json({ res });
+    } else {
+      throw new Error("Failed to insert Data");
+    }
   } catch (error) {
     console.log(error);
-    return NextResponse.json(error);
+    return NextResponse.json({
+      Message: "Something went wrong",
+    });
   }
 };
 
-export const DELETE = async (request: NextRequest) => {
-  const req = await request.json();
+export const PUT = async (request: NextRequest) => {
+  const { userId } = auth();
+
+  const req: addToCart = await request.json();
+
   try {
-    const res = await db
-      .delete(cartColumns)
-      .where(
-        and(
-          eq(cartColumns.user_id, req.user_id),
-          eq(cartColumns.product_title, req.product_title)
-        )
-      )
-      .returning();
-      console.log('Product Successfully Deleted')
-    return NextResponse.json({ message: "Product Successfully Deleted" });
+    if (req) {
+      const res = await db
+        .update(cartTable)
+        .set({
+          quantity: req.quantity,
+          total_price: req.price,
+        })
+        .where(and(eq(cartTable.user_id, userId as string), eq(cartTable.product_id, req.product_id))).returning();
+      return NextResponse.json({ res });
+    } else {
+      throw new Error("Failed to update Data");
+    }
   } catch (error) {
-    console.log("Error removing item from cart", error);
-    return NextResponse.json({ message: "Error Deleting Product" });
+    console.log(error);
+    return NextResponse.json({
+      Message: "Something went wrong",
+    });
   }
 };
